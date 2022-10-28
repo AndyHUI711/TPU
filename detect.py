@@ -38,7 +38,7 @@ from pycoral.utils.edgetpu import run_inference
 
 def main():
     default_model_dir = '../all_models'
-    default_model = 'model.tflite'
+    default_model = 'model_edgetpu.tflite'
     default_labels = 'mask_label.txt'
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', help='.tflite model path',
