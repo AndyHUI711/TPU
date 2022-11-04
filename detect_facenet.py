@@ -67,9 +67,9 @@ def main():
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame_resized = cv2.resize(frame_rgb, (width, height))
         frame_resized = frame_resized.astype(numpy.float32)
-        # 归一
+
         frame_resized /= 255
-        # 增加维度
+
         input_data = numpy.expand_dims(frame_resized, axis=0)
 
         # #run inference
