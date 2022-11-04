@@ -23,7 +23,7 @@ $ python3 edgetpu_face_detector.py --model mobilenet_ssd_v2_face_quant_postproce
 '''
 
 def get_cmd():
-    default_model_dir = '../models'
+    default_model_dir = ''
     default_model = 'ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite'
     default_labels = 'labels.txt'
     parser = argparse.ArgumentParser()
@@ -32,7 +32,7 @@ def get_cmd():
     parser.add_argument(
         '--threshold', help='Minimum confidence threshold.', default=1)
     parser.add_argument('--source', help='Video source.', default=0)
-    parser.add_argument('--edgetpu', help='With EdgeTpu', default=True)
+    parser.add_argument('--edgetpu', help='With EdgeTpu', default=False)
     parser.add_argument('--labels', help='label file path',
                         default=os.path.join(default_model_dir, default_labels))
 
@@ -51,8 +51,7 @@ def main():
         interpreter = Interpreter(args.model, experimental_delegates=[
                                   load_delegate('libedgetpu.so.1.0')])
     else:
-        interpreter = Interpreter(args.model,experimental_delegates=[
-            load_delegate('edgetpu.dll')])
+        interpreter = Interpreter(args.model)
 
     interpreter.allocate_tensors()
 
