@@ -13,7 +13,7 @@ TPU CORAL TESTING
     https://www.tensorflow.org/lite/guide/python)). You can check which version is installed
     using the ```pip3 show tflite_runtime``` command.
 
-2.  Clone this Git repo onto your computer or Dev Board:
+2.  Clone or Update this Git repo onto your computer or Dev Board:
 
     ```
     git clone https://github.com/AndyHUI711/TPU.git
