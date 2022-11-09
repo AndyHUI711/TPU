@@ -17,6 +17,8 @@ TPU CORAL TESTING
 
     ```
     git clone https://github.com/AndyHUI711/TPU.git
+   
+    git pull
     ```
 3.  Go to TPU file
 
