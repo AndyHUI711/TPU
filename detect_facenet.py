@@ -32,10 +32,7 @@ class FaceNetRECOG:
             # Creates a new tf.lite.Interpreter instance using the given model.
             face_engine = make_interpreter(FaceNet_weight)
             face_engine.allocate_tensors()
-            Create_embeddings(path, face_engine)  # BUG
-            # terminate called after throwing an instance of 'std::out_of_range'
-            # what():  basic_string::substr: __pos (which is 140) > this->size() (which is 0)
-            # Aborted
+            Create_embeddings(path, face_engine)
             f = h5py.File(path, 'r')
 
 
