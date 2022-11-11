@@ -106,6 +106,8 @@ class FaceNetRECOG:
             # objs is the bbox
             height, width, channels = cv2_im.shape
             scale_x, scale_y = width / inference_size[0], height / inference_size[1]
+            if objs:
+                print(objs)
             for obj in objs:
                 bbox = obj.bbox.scale(scale_x, scale_y)
                 l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
