@@ -35,10 +35,12 @@ class FaceNetRECOG:
             Create_embeddings(path,face_engine)
             f = h5py.File(path, 'r')
 
+
         class_arr = f['class_name'][:]
         class_arr = [k.decode() for k in class_arr]
         emb_arr = f['embeddings'][:]
 
+        print('read_embedding: class_arr: {}; emb_arr: {}'.format(class_arr, emb_arr))
         return class_arr, emb_arr   # name_list, known_embedding
 
     def crop_image(self, ans, frame, face_size):
