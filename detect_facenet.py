@@ -40,6 +40,25 @@ class FaceNetRECOG:
 
         return class_arr, emb_arr   # name_list, known_embedding
 
+    def crop_image(self, ans, frame):
+        Images_cropped = []
+        for i in range(0, len(ans)):
+            img_crop = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            BBC = ans[i].bounding_box  # bounding_box_coordinate
+
+            x = int(BBC[0][0])
+            y = int(BBC[0][1])
+            w = int(BBC[1][0] - BBC[0][0])
+            h = int(BBC[1][1] - BBC[0][1])
+
+            img_crop = img_crop[y:y + h, x:x + w]
+
+            img_crop = cv2.resize(img_crop, (160, 160))
+
+            Images_cropped.append(img_crop)
+
+        return Images_cropped
+
     def main(self):
         default_model_dir = 'all_models'
         default_model = 'ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite'
@@ -107,12 +126,14 @@ class FaceNetRECOG:
             height, width, channels = cv2_im.shape
             scale_x, scale_y = width / inference_size[0], height / inference_size[1]
             if objs:
-                print(objs)
-            for obj in objs:
-                bbox = obj.bbox.scale(scale_x, scale_y)
-                l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
+                print(objs) #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
+                # bbox = obj.bbox.scale(scale_x, scale_y)
+                # l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
+                # crop_face = frame[t:b, l:r]
                 # crop the face part of the frame
-                crop_face = frame[t:b, l:r]
+                crop_face = self.crop_image(objs, frame)
+
+
 
                 if cv2.waitKey(1) == ord('a'):
                     for k in range(0, len(crop_face)):
@@ -147,18 +168,20 @@ class FaceNetRECOG:
                 print('Face_class:', face_class)
                 print('Classes:', class_arr)
 
-            for count, obj in enumerate(objs):
-                print('-----------------------------------------')
-                if labels:
-                    print(labels[obj.label_id])
-                print('Score = ', obj.score)
-                box = obj.bounding_box.flatten().tolist()
+                for count, obj in enumerate(objs):
+                    print('-----------------------------------------')
+                    if labels:
+                        print(labels[obj.label_id])
+                    print('Score = ', obj.score)
+                    box = obj.bounding_box.flatten().tolist()
 
-                # Draw a rectangle and label
-                cv2.rectangle(cv2_im, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255, 255, 0), 2)
-                cv2.putText(cv2_im, '{}'.format(face_class[count]), (int(box[0]), int(box[1]) - 5),
-                            cv2.FONT_HERSHEY_PLAIN,
-                            1, (255, 0, 0), 1, cv2.LINE_AA)
+
+
+                    # Draw a rectangle and label
+                    cv2.rectangle(cv2_im, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255, 255, 0), 2)
+                    cv2.putText(cv2_im, '{}'.format(face_class[count]), (int(box[0]), int(box[1]) - 5),
+                                cv2.FONT_HERSHEY_PLAIN,
+                                1, (255, 0, 0), 1, cv2.LINE_AA)
 
 
             #cv2_im = self.append_objs_to_img(cv2_im, inference_size, objs, labels, name_overlay)
