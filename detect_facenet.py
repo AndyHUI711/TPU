@@ -33,6 +33,7 @@ class FaceNetRECOG:
             face_engine = make_interpreter(FaceNet_weight)
             face_engine.allocate_tensors()
             Create_embeddings(path, face_engine)
+            print("OK Here")
             f = h5py.File(path, 'r')
 
 
