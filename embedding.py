@@ -3,12 +3,13 @@
 # In[1]:
 from PIL import Image
 from facenet import Tpu_FaceRecognize
+from pycoral.adapters.common import input_size
 import numpy as np
 import os
 #from utils import *
 import cv2
 import h5py
-from pycoral.adapters.common import input_size
+
 
 def Create_embeddings(Embedding_book_path,face_engine):
     face_size = input_size(face_engine)
@@ -22,7 +23,7 @@ def Create_embeddings(Embedding_book_path,face_engine):
     f.close()
 
 
-def align_face(path='Workers/', face_size=(160, 160)):
+def align_face(path='Workers', face_size=(160, 160)):
     img_paths = os.listdir(path)
     class_names = [a.split('.')[0] for a in img_paths]
     img_paths = [os.path.join(path, p) for p in img_paths]
@@ -44,3 +45,8 @@ def align_face(path='Workers/', face_size=(160, 160)):
     print("scaled_arr", scaled_arr.shape)
     print('class_names_arr', class_names_arr)
     return scaled_arr, class_names_arr
+
+
+# debug testing
+if __name__ == '__main__':
+    align_face(path='Workers', face_size=(160, 160))
