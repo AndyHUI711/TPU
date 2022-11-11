@@ -147,17 +147,7 @@ class FaceNetRECOG:
                     Create_embeddings(args.Embedding_book, face_engine)
                     class_arr, emb_arr = self.read_embedding(args.Embedding_book)
 
-                # frame to RGB and resize
-                #face_im_rgb = cv2.cvtColor(np.asarray(crop_face), cv2.COLOR_BGR2RGB)
-                face_im_rgb = cv2.resize(crop_face, face_size)
-
-                # h,w,c 2 c,h,w
-                face_im_rgb = face_im_rgb.transpose((2, 0, 1))
-                # [0,255] to [-1,1]
-                face_im_rgb = (face_im_rgb - 127.5) / 127.5
-                # dimensions expand
-                face_input = np.expand_dims(face_im_rgb, 0)
-                embs = Tpu_FaceRecognize(face_engine, face_input)
+                embs = Tpu_FaceRecognize(face_engine, crop_face)
 
                 face_num = len(objs)
                 face_class = ['UNKNOWN'] * face_num
