@@ -29,8 +29,12 @@ TPU CORAL TESTING
 4.  Install the OpenCV libraries:
 
     ```
-
     bash install_requirements.sh
+    ```
+5. Install h5py lib:
+    ```
+    pip3 install --upgrade pip
+    pip3 install h5py
     ```
     
 ## Run the detection  (SSD models)
