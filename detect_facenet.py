@@ -53,7 +53,7 @@ class FaceNetRECOG:
 
 
             bbox = obj.bbox.scale(scale_x, scale_y)
-            l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
+            l, t, r, b = int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])
             img_crop = img_crop[t:b, l:r]
 
 
