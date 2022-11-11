@@ -27,7 +27,7 @@ class FaceNetRECOG:
         print("path: {}".format(path))
         # get known embedding
         try:
-            f = h5py.File(path, 'r')
+            f = h5py.File(path, 'a')
         except OSError:
             # Creates a new tf.lite.Interpreter instance using the given model.
             face_engine = make_interpreter(FaceNet_weight)
