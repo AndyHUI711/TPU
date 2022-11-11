@@ -29,13 +29,12 @@ class FaceNetRECOG:
         try:
             f = h5py.File(path, 'r')
         except OSError:
+            print("Test Here")
             # Creates a new tf.lite.Interpreter instance using the given model.
             face_engine = make_interpreter(FaceNet_weight)
             face_engine.allocate_tensors()
             Create_embeddings(path,face_engine)
             f = h5py.File(path, 'r')
-
-        print("Test Here")
 
 
         class_arr = f['class_name'][:]
