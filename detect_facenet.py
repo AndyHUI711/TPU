@@ -35,6 +35,8 @@ class FaceNetRECOG:
             Create_embeddings(path,face_engine)
             f = h5py.File(path, 'r')
 
+        print("Test Here")
+
 
         class_arr = f['class_name'][:]
         class_arr = [k.decode() for k in class_arr]
