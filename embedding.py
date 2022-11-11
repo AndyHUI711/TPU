@@ -20,7 +20,9 @@ def Create_embeddings(Embedding_book_path, face_engine):
 
     f = h5py.File(Embedding_book_path, 'w')
     class_arr = [i.encode() for i in class_arr]
+    print(class_arr)
     f.create_dataset('class_name', data=class_arr)
+    print(embs)
     f.create_dataset('embeddings', data=embs)
     f.close()
 
