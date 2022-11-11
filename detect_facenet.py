@@ -42,15 +42,17 @@ class FaceNetRECOG:
 
     def crop_image(self, ans, frame, face_size):
         Images_cropped = []
-        for i in range(0, len(ans)):
+        # objs is the bbox
+        height, width, channels = frame.shape
+        scale_x, scale_y = width / face_size[0], height / face_size[1]
+
+        for obj in ans:
             img_crop = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            BBC = ans[i].bbox  # bounding_box_coordinate
+            #BBC = ans[i].bbox  # bounding_box_coordinate
 
-            # objs is the bbox
-            height, width, channels = frame.shape
-            scale_x, scale_y = width / face_size[0], height / face_size[1]
 
-            bbox = ans.bbox.scale(scale_x, scale_y)
+
+            bbox = obj.bbox.scale(scale_x, scale_y)
             l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
             img_crop = img_crop[t:b, l:r]
 
