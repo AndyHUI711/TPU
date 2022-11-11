@@ -142,8 +142,8 @@ class FaceNetRECOG:
                     if min_diff < args.threshold_face:
                         index = np.argmin(diff)
                         face_class[i] = class_arr[index]
-            print('Face_class:', face_class)
-            print('Classes:', class_arr)
+                print('Face_class:', face_class)
+                print('Classes:', class_arr)
 
             for count, obj in enumerate(objs):
                 print('-----------------------------------------')
