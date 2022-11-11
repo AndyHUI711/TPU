@@ -74,7 +74,6 @@ class FaceNetRECOG:
 
         default_face_model = 'facenet_model/model_edgetpu.tflite'   # facenet weight
 
-        default_embedding_dir = 'embedding_book'
         default_embedding_file = 'embeddings.h5'
 
         parser = argparse.ArgumentParser()
@@ -93,7 +92,7 @@ class FaceNetRECOG:
         parser.add_argument("--threshold_face", type=float, default=1,
                             help="for facenet, higher threshold lower accuracy")
 
-        parser.add_argument("--Embedding_book", default=os.path.join(default_embedding_dir,default_embedding_file),
+        parser.add_argument("--Embedding_book", default=default_embedding_file,
                             help='saved embedding file path',)
 
         args = parser.parse_args()
