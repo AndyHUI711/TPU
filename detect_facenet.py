@@ -149,7 +149,7 @@ class FaceNetRECOG:
 
                 # frame to RGB and resize
                 #face_im_rgb = cv2.cvtColor(np.asarray(crop_face), cv2.COLOR_BGR2RGB)
-                face_im_rgb = cv2.resize(face_im_rgb, face_size)
+                face_im_rgb = cv2.resize(crop_face, face_size)
 
                 # h,w,c 2 c,h,w
                 face_im_rgb = face_im_rgb.transpose((2, 0, 1))
