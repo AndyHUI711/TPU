@@ -15,10 +15,10 @@ from facenet import Tpu_FaceRecognize
 from pycoral.adapters import classify
 
 class FaceNetRECOG:
-    def __init__(self):
-        self.name_list, self.known_embedding = self.loadFaceFeats()
-        self.name_list.append('UNKNOWN')
-        self.name_png_list = self.getNamePngs(self.name_list)
+    #def __init__(self):
+        # self.name_list, self.known_embedding = self.loadFaceFeats()
+        # self.name_list.append('UNKNOWN')
+        # self.name_png_list = self.getNamePngs(self.name_list)
 
     ### need edit
 
