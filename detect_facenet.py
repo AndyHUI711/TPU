@@ -148,12 +148,13 @@ class FaceNetRECOG:
                     class_arr, emb_arr = self.read_embedding(args.Embedding_book)
 
                 embs = Tpu_FaceRecognize(face_engine, crop_face)
+                print(embs)
 
                 face_num = len(objs)
                 face_class = ['UNKNOWN'] * face_num
 
                 for i in range(face_num):
-                    diff = np.mean(np.square(embs[i] - emb_arr), axis=1)
+                    diff = np.mean(np.square(embs[i] - emb_arr), axis=1) # error message 'NoneType' object is not subscriptable
                     min_diff = min(diff)
 
                     if min_diff < args.threshold_face:
