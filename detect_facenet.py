@@ -65,10 +65,10 @@ class FaceNetRECOG:
 
     def main(self):
         default_model_dir = 'all_models'
-        default_model = 'ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite'
-        default_labels = 'label.txt'
+        default_model = 'facedet_model/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite'
+        default_labels = 'facedet_model/label.txt'
 
-        default_face_model = 'ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite'   # facenet weight
+        default_face_model = 'facenet_model/model_edgetpu.tflite'   # facenet weight
 
         default_embedding_dir = 'embedding_book'
         default_embedding_file = 'embeddings.h5'
