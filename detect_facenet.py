@@ -24,6 +24,7 @@ class FaceNetRECOG:
 
     ### need edit
     def read_embedding(self, path, FaceNet_weight):
+        print("path: {}".format(path))
         # get known embedding
         try:
             f = h5py.File(path, 'r')
@@ -98,6 +99,7 @@ class FaceNetRECOG:
 
         # read embedding
         class_arr, emb_arr = self.read_embedding(args.Embedding_book, args.face_model)
+        print('class_arr: {}; emb_arr: {}'.format(class_arr, emb_arr))
 
         interpreter = make_interpreter(args.model)
         interpreter.allocate_tensors()
