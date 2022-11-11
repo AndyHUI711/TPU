@@ -44,7 +44,7 @@ class FaceNetRECOG:
         Images_cropped = []
         for i in range(0, len(ans)):
             img_crop = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            BBC = ans[i].bounding_box  # bounding_box_coordinate
+            BBC = ans[i].bbox  # bounding_box_coordinate
 
             x = int(BBC[0][0])
             y = int(BBC[0][1])
