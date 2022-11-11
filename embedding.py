@@ -25,6 +25,15 @@ def Create_embeddings(Embedding_book_path, face_engine):
     f.close()
 
 
+    f = h5py.File(Embedding_book_path, 'r')
+    print("embedding test")
+    class_arr = f['class_name'][:]
+    class_arr = [k.decode() for k in class_arr]
+    emb_arr = f['embeddings'][:]
+
+    print('read_embedding: class_arr: {};'.format(class_arr))
+
+
 def align_face(path, face_size):
     img_paths = os.listdir(path)
     class_names = [a.split('.')[0] for a in img_paths]

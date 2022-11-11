@@ -27,13 +27,13 @@ class FaceNetRECOG:
         print("path: {}".format(path))
         # get known embedding
         try:
-            f = h5py.File(path, 'a')
+            f = h5py.File(path, 'r')
         except OSError:
             # Creates a new tf.lite.Interpreter instance using the given model.
             face_engine = make_interpreter(FaceNet_weight)
             face_engine.allocate_tensors()
             Create_embeddings(path, face_engine)
-            f = h5py.File(path, 'a')
+            f = h5py.File(path, 'r')
 
 
         class_arr = f['class_name'][:]
