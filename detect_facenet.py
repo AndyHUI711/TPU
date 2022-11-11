@@ -148,7 +148,7 @@ class FaceNetRECOG:
                     class_arr, emb_arr = self.read_embedding(args.Embedding_book)
 
                 # frame to RGB and resize
-                face_im_rgb = cv2.cvtColor(crop_face, cv2.COLOR_BGR2RGB)
+                face_im_rgb = cv2.cvtColor(np.asarray(crop_face), cv2.COLOR_BGR2RGB)
                 face_im_rgb = cv2.resize(face_im_rgb, face_size)
 
                 # h,w,c 2 c,h,w
