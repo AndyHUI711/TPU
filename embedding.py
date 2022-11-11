@@ -11,9 +11,11 @@ import cv2
 import h5py
 
 
-def Create_embeddings(Embedding_book_path,face_engine):
+def Create_embeddings(Embedding_book_path, face_engine):
     face_size = input_size(face_engine)
-    img_arr, class_arr = align_face(path='Workers/', face_size=(160, 160))
+    print("face_size")
+
+    img_arr, class_arr = align_face('Workers/', face_size)
     embs = Tpu_FaceRecognize(face_engine, img_arr)
 
     f = h5py.File(Embedding_book_path, 'w')
