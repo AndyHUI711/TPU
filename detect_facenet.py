@@ -40,18 +40,20 @@ class FaceNetRECOG:
 
         return class_arr, emb_arr   # name_list, known_embedding
 
-    def crop_image(self, ans, frame):
+    def crop_image(self, ans, frame, face_size):
         Images_cropped = []
         for i in range(0, len(ans)):
             img_crop = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             BBC = ans[i].bbox  # bounding_box_coordinate
 
-            x = int(BBC[0][0])
-            y = int(BBC[0][1])
-            w = int(BBC[1][0] - BBC[0][0])
-            h = int(BBC[1][1] - BBC[0][1])
+            # objs is the bbox
+            height, width, channels = frame.shape
+            scale_x, scale_y = width / face_size[0], height / face_size[1]
 
-            img_crop = img_crop[y:y + h, x:x + w]
+            bbox = ans.bbox.scale(scale_x, scale_y)
+            l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
+            img_crop = img_crop[t:b, l:r]
+
 
             img_crop = cv2.resize(img_crop, (160, 160))
 
@@ -131,7 +133,7 @@ class FaceNetRECOG:
                 # l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
                 # crop_face = frame[t:b, l:r]
                 # crop the face part of the frame
-                crop_face = self.crop_image(objs, frame)
+                crop_face = self.crop_image(objs, frame, face_size)
 
 
 
