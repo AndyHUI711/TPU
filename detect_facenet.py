@@ -26,9 +26,9 @@ class FaceNetRECOG:
     def read_embedding(self, path, FaceNet_weight):
         print("path: {}".format(path))
         # get known embedding
-        try:
+        if os.path.exists(path):
             f = h5py.File(path, 'r')
-        except OSError:
+        else:
             # Creates a new tf.lite.Interpreter instance using the given model.
             face_engine = make_interpreter(FaceNet_weight)
             face_engine.allocate_tensors()
