@@ -98,7 +98,6 @@ class FaceNetRECOG:
 
         # read embedding
         class_arr, emb_arr = self.read_embedding(args.Embedding_book, args.face_model)
-        print(class_arr)
 
         interpreter = make_interpreter(args.model)
         interpreter.allocate_tensors()
