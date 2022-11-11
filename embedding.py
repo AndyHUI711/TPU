@@ -27,8 +27,9 @@ def Create_embeddings(Embedding_book_path, face_engine):
     f.close()
 
 
-def align_face(path='Workers/', face_size=(160, 160)):
+def align_face(path, face_size):
     img_paths = os.listdir(path)
+    print(img_paths)
     class_names = [a.split('.')[0] for a in img_paths]
     img_paths = [os.path.join(path, p) for p in img_paths]
     scaled_arr = []
