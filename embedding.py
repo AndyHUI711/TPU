@@ -13,7 +13,7 @@ import h5py
 
 def Create_embeddings(Embedding_book_path,face_engine):
     face_size = input_size(face_engine)
-    img_arr, class_arr = align_face(face_size)
+    img_arr, class_arr = align_face(path='Workers/', face_size=(160, 160))
     embs = Tpu_FaceRecognize(face_engine, img_arr)
 
     f = h5py.File(Embedding_book_path, 'w')
@@ -23,7 +23,7 @@ def Create_embeddings(Embedding_book_path,face_engine):
     f.close()
 
 
-def align_face(path='Workers', face_size=(160, 160)):
+def align_face(path='Workers/', face_size=(160, 160)):
     img_paths = os.listdir(path)
     class_names = [a.split('.')[0] for a in img_paths]
     img_paths = [os.path.join(path, p) for p in img_paths]
@@ -49,4 +49,4 @@ def align_face(path='Workers', face_size=(160, 160)):
 
 # debug testing
 if __name__ == '__main__':
-    align_face(path='Workers', face_size=(160, 160))
+    align_face((160, 160))
