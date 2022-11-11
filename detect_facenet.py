@@ -36,8 +36,6 @@ class FaceNetRECOG:
             # terminate called after throwing an instance of 'std::out_of_range'
             # what():  basic_string::substr: __pos (which is 140) > this->size() (which is 0)
             # Aborted
-
-            print("Test Here create_embedding")
             f = h5py.File(path, 'r')
 
 

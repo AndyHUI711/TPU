@@ -13,7 +13,7 @@ import h5py
 
 def Create_embeddings(Embedding_book_path, face_engine):
     face_size = input_size(face_engine)
-    print(face_size)
+    #print(face_size) (160,160)
 
     img_arr, class_arr = align_face('Workers/', face_size)
 
@@ -36,6 +36,7 @@ def align_face(path, face_size):
     class_names_arr = []
 
     for image_path, class_name in zip(img_paths, class_names):
+        print(image_path)
         img = cv2.imread(image_path)
         scaled = cv2.resize(img, face_size, interpolation=cv2.INTER_LINEAR)
 
@@ -54,4 +55,4 @@ def align_face(path, face_size):
 
 # debug testing
 if __name__ == '__main__':
-    align_face((160, 160))
+    align_face('Workers/', (160,160))
