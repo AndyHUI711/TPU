@@ -143,8 +143,7 @@ class FaceNetRECOG:
             height, width, channels = cv2_im.shape
             scale_x, scale_y = width / inference_size[0], height / inference_size[1]
             if objs:
-                print(objs)
-                #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
+                print(objs) #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
                 # bbox = obj.bbox.scale(scale_x, scale_y)
                 # l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
                 # crop_face = frame[t:b, l:r]
@@ -167,7 +166,7 @@ class FaceNetRECOG:
                 face_class = ['UNKNOWN'] * face_num
 
                 for i in range(face_num):
-                    diff = np.mean((embs[i] - emb_arr), axis=1)
+                    diff = np.mean(np.square(embs[i] - emb_arr), axis=1)
                     # error message 'NoneType' object is not subscriptable
                     # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                     min_diff = min(diff)
@@ -181,7 +180,7 @@ class FaceNetRECOG:
                 for count, obj in enumerate(objs):
                     print('-----------------------------------------')
                     if labels:
-                        print(labels[obj.id])
+                        print(labels[obj.label_id])
                     print('Score = ', obj.score)
                     box = obj.bounding_box.flatten().tolist()
 
