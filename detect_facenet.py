@@ -61,7 +61,7 @@ class FaceNetRECOG:
                 return False;
             try:
                 img_crop = cv2.resize(img_crop, (160, 160))
-            except cv2.erroras as e:
+            except cv2.error as e:
                 print(e)
                 return False;
             #print("1",img_crop.shape)
@@ -172,15 +172,16 @@ class FaceNetRECOG:
                     #print("mbs{} shape{}".format(i, embs[i].shape))
                     #print("emb_arr shape{}".format(emb_arr.shape))
 
-                    diff = np.mean(np.square(embs[i] - emb_arr), axis=1)
+                    diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
                     # error message 'NoneType' object is not subscriptable
                     # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
-                    min_diff = min(diff)
+                    min_index = np.argmin(diff_list)
+                    min_diff = diff_list[min_index]
                     print(min_diff)
 
                     if min_diff < args.threshold_face:
-                        index = np.argmin(diff)
-                        face_class[i] = class_arr[index]
+                        #min_index = np.argmin(diff_list)
+                        face_class[i] = class_arr[min_index]
 
                 print('Face_class:', face_class)
                 print('Classes:', class_arr)

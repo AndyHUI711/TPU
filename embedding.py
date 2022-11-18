@@ -49,12 +49,12 @@ def align_face(path, face_size):
     for image_path, class_name in zip(img_paths, class_names):
         img = cv2.imread(image_path)
         scaled = cv2.resize(img, face_size, interpolation=cv2.INTER_LINEAR)
-        print("1", scaled.shape)
+        #print("1", scaled.shape)
         img = scaled.transpose((2, 0, 1))
         img = (img - 127.5) / 127.5
-        print("2", img.shape)
+        #print("2", img.shape)
         scaled = np.expand_dims(img, 0)
-        print("3", scaled.shape)
+        #print("3", scaled.shape)
 
 
         # scaled = Image.fromarray(cv2.cvtColor(scaled, cv2.COLOR_BGR2RGB))
