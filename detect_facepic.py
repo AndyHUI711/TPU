@@ -55,6 +55,7 @@ class FaceNetRECOG:
             bbox = obj.bbox.scale(scale_x, scale_y)
             l, t, r, b = int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])
             img_crop = img_crop[t:b, l:r]
+            cv2.imsave("Workers/Andy_crop.jpg",img_crop)
 
             img_crop = cv2.resize(img_crop, (160, 160))
 
@@ -143,7 +144,6 @@ class FaceNetRECOG:
             for i in range(face_num):
                 #print("mbs{} shape{}".format(i, embs[i].shape))
                 #print("emb_arr shape{}".format(emb_arr.shape))
-                print(i)
 
                 #print((embs[i] - emb_arr))
                 diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
@@ -151,7 +151,7 @@ class FaceNetRECOG:
                 # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                 min_index = np.argmin(diff_list)
                 min_diff = diff_list[min_index]
-                print(min_diff)
+                print("mini diff: ",min_diff)
 
                 if min_diff < args.threshold_face:
                     #min_index = np.argmin(diff_list)
