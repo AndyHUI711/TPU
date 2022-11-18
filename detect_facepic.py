@@ -162,6 +162,7 @@ class FaceNetRECOG:
                 # error message 'NoneType' object is not subscriptable
                 # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                 min_index = np.argmin(diff_list)
+                print("index: ",min_index)
                 min_diff = diff_list[min_index]
                 print("mini diff: ",min_diff)
 
