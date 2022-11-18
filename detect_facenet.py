@@ -180,7 +180,7 @@ class FaceNetRECOG:
                 for count, obj in enumerate(objs):
                     print('-----------------------------------------')
                     if labels:
-                        print(labels[obj.label_id])
+                        print(labels[obj.id])
                     print('Score = ', obj.score)
                     box = obj.bounding_box.flatten().tolist()
 
