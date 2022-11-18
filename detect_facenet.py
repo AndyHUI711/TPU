@@ -187,9 +187,8 @@ class FaceNetRECOG:
                     if labels:
                         print(labels[obj.id])
                     print('Score = ', obj.score)
-                    box = obj.bbox.flatten().tolist()
 
-
+                    box = obj.bbox.scale(scale_x, scale_y)
 
                     # Draw a rectangle and label
                     cv2.rectangle(cv2_im, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255, 255, 0), 2)
