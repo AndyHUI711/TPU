@@ -138,53 +138,44 @@ class FaceNetRECOG:
         height, width, channels = frame.shape
         scale_x, scale_y = width / inference_size[0], height / inference_size[1]
         if objs:
-            #print(objs)
-            #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
-            # bbox = obj.bbox.scale(scale_x, scale_y)
-
-            # crop_face = frame[t:b, l:r]
-            # crop the face part of the frame
             crop_face = self.crop_image(objs, frame, face_size)
-            if crop_face != False:
 
+            embs = Tpu_FaceRecognize(face_engine, crop_face)
+            #print(embs) #ok
 
+            face_num = len(objs)
+            face_class = ['UNKNOWN'] * face_num
 
-                embs = Tpu_FaceRecognize(face_engine, crop_face)
-                #print(embs) #ok
+            for i in range(face_num):
+                #print("mbs{} shape{}".format(i, embs[i].shape))
+                #print("emb_arr shape{}".format(emb_arr.shape))
 
-                face_num = len(objs)
-                face_class = ['UNKNOWN'] * face_num
+                diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
+                # error message 'NoneType' object is not subscriptable
+                # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
+                min_index = np.argmin(diff_list)
+                min_diff = diff_list[min_index]
+                print(min_diff)
 
-                for i in range(face_num):
-                    #print("mbs{} shape{}".format(i, embs[i].shape))
-                    #print("emb_arr shape{}".format(emb_arr.shape))
+                if min_diff < args.threshold_face:
+                    #min_index = np.argmin(diff_list)
+                    face_class[i] = class_arr[min_index]
 
-                    diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
-                    # error message 'NoneType' object is not subscriptable
-                    # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
-                    min_index = np.argmin(diff_list)
-                    min_diff = diff_list[min_index]
-                    print(min_diff)
+            print('Face_class:', face_class)
+            print('Classes:', class_arr)
 
-                    if min_diff < args.threshold_face:
-                        #min_index = np.argmin(diff_list)
-                        face_class[i] = class_arr[min_index]
+            for count, obj in enumerate(objs):
+                print('-----------------------------------------')
+                # if labels:
+                #     print(labels[obj.id])
+                # #print('Score = ', obj.score)
 
-                print('Face_class:', face_class)
-                print('Classes:', class_arr)
-
-                for count, obj in enumerate(objs):
-                    print('-----------------------------------------')
-                    # if labels:
-                    #     print(labels[obj.id])
-                    # #print('Score = ', obj.score)
-
-                    box = obj.bbox.scale(scale_x, scale_y)
-                    # Draw a rectangle and label
-                    cv2.rectangle(frame, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255, 255, 0), 2)
-                    cv2.putText(frame, '{}'.format(face_class[count]), (int(box[0]), int(box[1]) - 5),
-                                cv2.FONT_HERSHEY_PLAIN,
-                                1, (255, 0, 0), 1, cv2.LINE_AA)
+                box = obj.bbox.scale(scale_x, scale_y)
+                # Draw a rectangle and label
+                cv2.rectangle(frame, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255, 255, 0), 2)
+                cv2.putText(frame, '{}'.format(face_class[count]), (int(box[0]), int(box[1]) - 5),
+                            cv2.FONT_HERSHEY_PLAIN,
+                            1, (255, 0, 0), 1, cv2.LINE_AA)
 
             #cv2_im = self.append_objs_to_img(cv2_im, inference_size, objs, labels, name_overlay)
 
