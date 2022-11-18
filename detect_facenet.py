@@ -56,8 +56,7 @@ class FaceNetRECOG:
             l, t, r, b = int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])
             img_crop = img_crop[t:b, l:r]
 
-            if img_crop == None:
-                return
+            print(img_crop)
 
             img_crop = cv2.resize(img_crop, (160, 160))
             #print("1",img_crop.shape)
