@@ -144,9 +144,10 @@ class FaceNetRECOG:
             # print("2",img.shape)
             img_crop = np.expand_dims(img, 0)
             # print("3",img_crop.shape)
-            crop_face.append(img_crop)
+            Images_cropped = []
+            Images_cropped.append(img_crop)
 
-            embs = Tpu_FaceRecognize(face_engine, crop_face)
+            embs = Tpu_FaceRecognize(face_engine, Images_cropped)
             print("embs:",embs) #ok
 
             face_num = len(objs)
