@@ -61,7 +61,7 @@ class FaceNetRECOG:
                 return False;
             try:
                 img_crop = cv2.resize(img_crop, (160, 160))
-            except (cv2.error, OpenCV Error) as e:
+            except cv2.erroras as e:
                 print(e)
                 return False;
             #print("1",img_crop.shape)
