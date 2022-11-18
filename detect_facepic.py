@@ -144,7 +144,9 @@ class FaceNetRECOG:
                 #print("mbs{} shape{}".format(i, embs[i].shape))
                 #print("emb_arr shape{}".format(emb_arr.shape))
 
+                print("bb error")
                 diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
+                print("aa error")
                 # error message 'NoneType' object is not subscriptable
                 # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                 min_index = np.argmin(diff_list)
