@@ -15,14 +15,23 @@ def Create_embeddings(Embedding_book_path, face_engine):
     face_size = input_size(face_engine)
     #print(face_size) (160,160)
 
+
     img_arr, class_arr = align_face('Workers/', face_size)
+
+    print("1", img_arr.shape)
+    img = img_arr.transpose((2, 0, 1))
+    img = (img - 127.5) / 127.5
+    print("2", img.shape)
+    img_crop = np.expand_dims(img, 0)
+    print("3", img_crop.shape)
+
     embs = Tpu_FaceRecognize(face_engine, img_arr)
+    print(embs)
 
     f = h5py.File(Embedding_book_path, 'w')
     class_arr = [i.encode() for i in class_arr]
     print(class_arr)
     f.create_dataset('class_name', data=class_arr)
-    print(embs)
     f.create_dataset('embeddings', data=embs)
     f.close()
 

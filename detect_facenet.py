@@ -150,8 +150,6 @@ class FaceNetRECOG:
                 # crop the face part of the frame
                 crop_face = self.crop_image(objs, frame, face_size)
 
-
-
                 if cv2.waitKey(1) == ord('a'):
                     for k in range(0, len(crop_face)):
                         new_class_name = input('Please input name of worker:')
@@ -162,7 +160,7 @@ class FaceNetRECOG:
 
 
                 embs = Tpu_FaceRecognize(face_engine, crop_face)
-                print(embs)
+                print(embs) #ok
 
                 face_num = len(objs)
                 face_class = ['UNKNOWN'] * face_num
