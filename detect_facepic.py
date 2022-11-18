@@ -55,7 +55,7 @@ class FaceNetRECOG:
             bbox = obj.bbox.scale(scale_x, scale_y)
             l, t, r, b = int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])
             img_crop = img_crop[t:b, l:r]
-            cv2.imsave("Workers/Andy_crop.jpg",img_crop)
+            cv2.imwrite("Workers/Andy_crop.jpg",img_crop)
 
             img_crop = cv2.resize(img_crop, (160, 160))
 
