@@ -23,11 +23,11 @@ def Tpu_FaceRecognize(engine, face_img):
     print(result)
     #result.sort(key=takeSecond)
 
-    np_result = []
-    for i in range(0, len(result)):
-      np_result.append(result[i][1])
+    # np_result = []
+    # for i in range(0, len(result)):
+    #   np_result.append(result[i][1])
 
-    faces.append(np_result)
+    faces.append(result)
 
   np_face = np.array(faces)
 
