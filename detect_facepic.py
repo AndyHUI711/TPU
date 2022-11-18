@@ -145,7 +145,7 @@ class FaceNetRECOG:
                 #print("emb_arr shape{}".format(emb_arr.shape))
 
                 print("bb error")
-                print((embs[i] - emb_arr))
+                print((embs[0] - emb_arr))
                 diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
                 print("aa error")
                 # error message 'NoneType' object is not subscriptable
