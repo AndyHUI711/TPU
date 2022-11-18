@@ -49,27 +49,19 @@ class FaceNetRECOG:
         # objs is the bbox
         height, width, channels = frame.shape
         scale_x, scale_y = width / face_size[0], height / face_size[1]
-
         for obj in ans:
             img_crop = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             #BBC = ans[i].bbox  # bounding_box_coordinate
-
-
-
             bbox = obj.bbox.scale(scale_x, scale_y)
             l, t, r, b = int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])
             img_crop = img_crop[t:b, l:r]
-
-
             img_crop = cv2.resize(img_crop, (160, 160))
             #print("1",img_crop.shape)
-
             img = img_crop.transpose((2, 0, 1))
             img = (img - 127.5) / 127.5
             #print("2",img.shape)
             img_crop = np.expand_dims(img, 0)
             #print("3",img_crop.shape)
-
             Images_cropped.append(img_crop)
 
         return Images_cropped
@@ -143,7 +135,7 @@ class FaceNetRECOG:
             height, width, channels = cv2_im.shape
             scale_x, scale_y = width / inference_size[0], height / inference_size[1]
             if objs:
-                print(objs)
+                #print(objs)
                 #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
                 # bbox = obj.bbox.scale(scale_x, scale_y)
 
@@ -152,6 +144,7 @@ class FaceNetRECOG:
                 crop_face = self.crop_image(objs, frame, face_size)
 
                 if cv2.waitKey(1) & 0xFF == ord('a'):
+                    print("Create new worker")
                     for k in range(0, len(crop_face)):
                         new_class_name = input('Please input name of worker:')
                         new_save = cv2.cvtColor(crop_face[k], cv2.COLOR_BGR2RGB)
@@ -174,6 +167,7 @@ class FaceNetRECOG:
                     # error message 'NoneType' object is not subscriptable
                     # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                     min_diff = min(diff)
+                    print(min_diff)
 
                     if min_diff < args.threshold_face:
                         index = np.argmin(diff)
@@ -184,18 +178,16 @@ class FaceNetRECOG:
 
                 for count, obj in enumerate(objs):
                     print('-----------------------------------------')
-                    if labels:
-                        print(labels[obj.id])
-                    #print('Score = ', obj.score)
+                    # if labels:
+                    #     print(labels[obj.id])
+                    # #print('Score = ', obj.score)
 
                     box = obj.bbox.scale(scale_x, scale_y)
-
                     # Draw a rectangle and label
                     cv2.rectangle(cv2_im, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255, 255, 0), 2)
                     cv2.putText(cv2_im, '{}'.format(face_class[count]), (int(box[0]), int(box[1]) - 5),
                                 cv2.FONT_HERSHEY_PLAIN,
                                 1, (255, 0, 0), 1, cv2.LINE_AA)
-
 
             #cv2_im = self.append_objs_to_img(cv2_im, inference_size, objs, labels, name_overlay)
 
@@ -203,7 +195,10 @@ class FaceNetRECOG:
             t2 = cv2.getTickCount()
             t = (t2 - t1) / cv2.getTickFrequency()
             fps = 1.0 / t
+
             cv2.putText(cv2_im, 'fps: {:.2f}'.format(fps), (5, 20), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 0), 1, cv2.LINE_AA)
+            cv2.putText(cv2_im, 'A: Add new class', (5, 450), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 0), 1, cv2.LINE_AA)
+            cv2.putText(cv2_im, 'Q: Quit', (5, 470), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 0), 1, cv2.LINE_AA)
 
             cv2.imshow('frame', cv2_im)
             if cv2.waitKey(1) & 0xFF == ord('q'):

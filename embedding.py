@@ -18,8 +18,6 @@ def Create_embeddings(Embedding_book_path, face_engine):
 
     img_arr, class_arr = align_face('Workers/', (160,160))
 
-
-
     embs = Tpu_FaceRecognize(face_engine, img_arr)
     #print(embs)
 
