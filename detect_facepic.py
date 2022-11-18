@@ -11,7 +11,7 @@ from pycoral.utils.edgetpu import make_interpreter
 from pycoral.utils.edgetpu import run_inference
 from embedding import Create_embeddings
 from facenet import Tpu_FaceRecognize
-from scipy.spatial.distance import cosine
+
 from pycoral.adapters import classify
 
 class FaceNetRECOG:
@@ -146,7 +146,8 @@ class FaceNetRECOG:
 
                 print("bb error")
                 print(embs)
-                diff_list = cosine(embs[i],emb_arr)
+                print((embs[i] - emb_arr))
+                diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
                 print("aa error")
                 # error message 'NoneType' object is not subscriptable
                 # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
