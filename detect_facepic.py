@@ -133,7 +133,8 @@ class FaceNetRECOG:
         height, width, channels = frame.shape
         scale_x, scale_y = width / inference_size[0], height / inference_size[1]
         if objs:
-            crop_face = self.crop_image(objs, frame, face_size)
+            #crop_face = self.crop_image(objs, frame, face_size)
+            crop_face = frame
 
             embs = Tpu_FaceRecognize(face_engine, crop_face)
             print("embs:",embs) #ok
