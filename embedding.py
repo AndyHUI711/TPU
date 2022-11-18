@@ -20,7 +20,7 @@ def Create_embeddings(Embedding_book_path, face_engine):
 
 
 
-    embs = Tpu_FaceRecognize(face_engine, img_arr.tobytes())
+    embs = Tpu_FaceRecognize(face_engine, img_arr)
     print(embs)
 
     f = h5py.File(Embedding_book_path, 'w')
