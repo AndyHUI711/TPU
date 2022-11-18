@@ -125,7 +125,7 @@ class FaceNetRECOG:
 
         cap = cv2.VideoCapture(args.camera_idx)
 
-        frame = cv2.read("Workers/Andy_1.jpg")
+        frame = cv2.imread("Workers/Andy_1.jpg")
         # frame to RGB and resize
         cv2_im_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         cv2_im_rgb = cv2.resize(cv2_im_rgb, inference_size)
