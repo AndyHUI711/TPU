@@ -18,12 +18,7 @@ def Create_embeddings(Embedding_book_path, face_engine):
 
     img_arr, class_arr = align_face('Workers/', face_size)
 
-    print("1", img_arr.shape)
-    img = img_arr.transpose((2, 0, 1))
-    img = (img - 127.5) / 127.5
-    print("2", img.shape)
-    img_crop = np.expand_dims(img, 0)
-    print("3", img_crop.shape)
+
 
     embs = Tpu_FaceRecognize(face_engine, img_arr)
     print(embs)
@@ -55,9 +50,16 @@ def align_face(path, face_size):
     for image_path, class_name in zip(img_paths, class_names):
         img = cv2.imread(image_path)
         scaled = cv2.resize(img, face_size, interpolation=cv2.INTER_LINEAR)
+        print("1", scaled.shape)
+        img = scaled.transpose((2, 0, 1))
+        img = (img - 127.5) / 127.5
+        print("2", img.shape)
+        scaled = np.expand_dims(img, 0)
+        print("3", scaled.shape)
 
-        scaled = Image.fromarray(cv2.cvtColor(scaled, cv2.COLOR_BGR2RGB))
-        scaled = np.asarray(scaled)
+
+        # scaled = Image.fromarray(cv2.cvtColor(scaled, cv2.COLOR_BGR2RGB))
+        # scaled = np.asarray(scaled)
 
         scaled_arr.append(scaled)
         class_names_arr.append(class_name)
