@@ -145,7 +145,6 @@ class FaceNetRECOG:
                 #print("emb_arr shape{}".format(emb_arr.shape))
 
                 print("bb error")
-                print(embs)
                 print((embs[i] - emb_arr))
                 diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
                 print("aa error")
