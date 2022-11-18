@@ -62,6 +62,14 @@ class FaceNetRECOG:
 
 
             img_crop = cv2.resize(img_crop, (160, 160))
+            print("1",img_crop.shape)
+
+            img = cv2.cvtColor(img_crop, cv2.COLOR_BGR2RGB)
+            img = img.transpose((2, 0, 1))
+            img = (img - 127.5) / 127.5
+            print("2",img.shape)
+            img_crop = np.expand_dims(img, 0)
+            print("3",img_crop.shape)
 
             Images_cropped.append(img_crop)
 
@@ -152,6 +160,7 @@ class FaceNetRECOG:
                         cv2.imwrite('Workers/' + str(new_class_name) + '.jpg', new_save)
                     Create_embeddings(args.Embedding_book, face_engine)
                     class_arr, emb_arr = self.read_embedding(args.Embedding_book)
+
 
                 embs = Tpu_FaceRecognize(face_engine, crop_face)
                 print(embs)
