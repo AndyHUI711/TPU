@@ -167,6 +167,9 @@ class FaceNetRECOG:
                 face_class = ['UNKNOWN'] * face_num
 
                 for i in range(face_num):
+                    print("mbs{} shape{}".format(i, embs[i].shape))
+                    print("emb_arr shape{}".format(emb_arr.shape))
+
                     diff = np.mean(np.square(embs[i] - emb_arr), axis=1)
                     # error message 'NoneType' object is not subscriptable
                     # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
