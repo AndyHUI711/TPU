@@ -166,7 +166,9 @@ class FaceNetRECOG:
                 face_class = ['UNKNOWN'] * face_num
 
                 for i in range(face_num):
-                    diff = np.mean(np.square(embs[i] - emb_arr), axis=1) # error message 'NoneType' object is not subscriptable
+                    diff = np.mean((embs[i] - emb_arr), axis=1)
+                    # error message 'NoneType' object is not subscriptable
+                    # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                     min_diff = min(diff)
 
                     if min_diff < args.threshold_face:
