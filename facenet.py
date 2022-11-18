@@ -11,7 +11,7 @@ def Tpu_FaceRecognize(engine, face_img):
     img = np.asarray(face).flatten()
 
     run_inference(engine, img.tobytes())
-    result = classify.get_classes(engine, top_k=3, score_threshold=- 0.5)
+    result = classify.get_classes(engine, top_k=200, score_threshold=- 0.5)
     # result = engine.ClassifyWithInputTensor(img, top_k=3, threshold=-0.5)
     result.sort(key=takeSecond)
 
@@ -22,4 +22,4 @@ def Tpu_FaceRecognize(engine, face_img):
     faces.append(np_result)
   np_face = np.array(faces)
 
-  return
+  return np_face
