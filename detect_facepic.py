@@ -146,7 +146,7 @@ class FaceNetRECOG:
 
                 print("bb error")
                 print(embs)
-                diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
+                diff_list = np.mean(np.square(embs[i] - emb_arr), axis=1)
                 print("aa error")
                 # error message 'NoneType' object is not subscriptable
                 # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
