@@ -47,8 +47,7 @@ def align_face(path, face_size):
         img = cv2.imread(image_path)
         scaled = cv2.resize(img, face_size, interpolation=cv2.INTER_LINEAR)
         print(scaled.shape)
-        scaled = np.expand_dims(scaled, 0)
-        print(scaled.shape)
+
         scaled = np.asarray(scaled)
         print(scaled.shape)
 
