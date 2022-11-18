@@ -47,7 +47,7 @@ def align_face(path, face_size):
         img = cv2.imread(image_path)
         scaled = cv2.resize(img, face_size, interpolation=cv2.INTER_LINEAR)
 
-        #scaled = Image.fromarray(cv2.cvtColor(scaled, cv2.COLOR_BGR2RGB))
+        scaled = Image.fromarray(cv2.cvtColor(scaled, cv2.COLOR_BGR2RGB))
         scaled = np.asarray(scaled)
 
         scaled_arr.append(scaled)

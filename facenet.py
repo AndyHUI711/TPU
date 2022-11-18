@@ -7,9 +7,10 @@ def takeSecond(elem):
 def Tpu_FaceRecognize(engine, face_img):
 
   faces = []
+  print("1")
   for face in face_img:
     img = np.asarray(face).flatten()
-
+    print("2")
     run_inference(engine, img.tobytes())
     result = classify.get_classes(engine, top_k=200, score_threshold=- 0.5)
     # result = engine.ClassifyWithInputTensor(img, top_k=3, threshold=-0.5)
