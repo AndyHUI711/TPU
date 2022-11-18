@@ -62,13 +62,13 @@ class FaceNetRECOG:
 
 
             img_crop = cv2.resize(img_crop, (160, 160))
-            print("1",img_crop.shape)
+            #print("1",img_crop.shape)
 
             img = img_crop.transpose((2, 0, 1))
             img = (img - 127.5) / 127.5
-            print("2",img.shape)
+            #print("2",img.shape)
             img_crop = np.expand_dims(img, 0)
-            print("3",img_crop.shape)
+            #print("3",img_crop.shape)
 
             Images_cropped.append(img_crop)
 
@@ -151,7 +151,7 @@ class FaceNetRECOG:
                 # crop the face part of the frame
                 crop_face = self.crop_image(objs, frame, face_size)
 
-                if cv2.waitKey(1) == ord('a'):
+                if cv2.waitKey(1) & 0xFF == ord('a'):
                     for k in range(0, len(crop_face)):
                         new_class_name = input('Please input name of worker:')
                         new_save = cv2.cvtColor(crop_face[k], cv2.COLOR_BGR2RGB)
@@ -161,14 +161,14 @@ class FaceNetRECOG:
 
 
                 embs = Tpu_FaceRecognize(face_engine, crop_face)
-                print(embs) #ok
+                #print(embs) #ok
 
                 face_num = len(objs)
                 face_class = ['UNKNOWN'] * face_num
 
                 for i in range(face_num):
-                    print("mbs{} shape{}".format(i, embs[i].shape))
-                    print("emb_arr shape{}".format(emb_arr.shape))
+                    #print("mbs{} shape{}".format(i, embs[i].shape))
+                    #print("emb_arr shape{}".format(emb_arr.shape))
 
                     diff = np.mean(np.square(embs[i] - emb_arr), axis=1)
                     # error message 'NoneType' object is not subscriptable
@@ -186,7 +186,7 @@ class FaceNetRECOG:
                     print('-----------------------------------------')
                     if labels:
                         print(labels[obj.id])
-                    print('Score = ', obj.score)
+                    #print('Score = ', obj.score)
 
                     box = obj.bbox.scale(scale_x, scale_y)
 

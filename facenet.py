@@ -20,7 +20,7 @@ def Tpu_FaceRecognize(engine, face_img):
 
 
     # result = engine.ClassifyWithInputTensor(img, top_k=3, threshold=-0.5)
-    print(result)
+    #print(result)
     #result.sort(key=takeSecond)
 
     # np_result = []

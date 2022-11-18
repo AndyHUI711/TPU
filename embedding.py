@@ -21,18 +21,18 @@ def Create_embeddings(Embedding_book_path, face_engine):
 
 
     embs = Tpu_FaceRecognize(face_engine, img_arr)
-    print(embs)
+    #print(embs)
 
     f = h5py.File(Embedding_book_path, 'w')
     class_arr = [i.encode() for i in class_arr]
-    print(class_arr)
+    #print(class_arr)
     f.create_dataset('class_name', data=class_arr)
     f.create_dataset('embeddings', data=embs)
     f.close()
 
 
     f = h5py.File(Embedding_book_path, 'r')
-    print("embedding test")
+    #print("embedding test")
     class_arr = f['class_name'][:]
     class_arr = [k.decode() for k in class_arr]
     emb_arr = f['embeddings'][:]
