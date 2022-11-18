@@ -61,7 +61,8 @@ class FaceNetRECOG:
                 return False;
             try:
                 img_crop = cv2.resize(img_crop, (160, 160))
-            except cv2.error as e:
+            except (cv2.error, OpenCV Error) as e:
+                print(e)
                 return False;
             #print("1",img_crop.shape)
             img = img_crop.transpose((2, 0, 1))
@@ -149,16 +150,16 @@ class FaceNetRECOG:
                 # crop_face = frame[t:b, l:r]
                 # crop the face part of the frame
                 crop_face = self.crop_image(objs, frame, face_size)
-                if crop_face == False: return
+                if crop_face != False:
 
-                if cv2.waitKey(1) & 0xFF == ord('a'):
-                    print("Create new worker")
-                    for k in range(0, len(crop_face)):
-                        new_class_name = input('Please input name of worker:')
-                        new_save = cv2.cvtColor(crop_face[k], cv2.COLOR_BGR2RGB)
-                        cv2.imwrite('Workers/' + str(new_class_name) + '.jpg', new_save)
-                    Create_embeddings(args.Embedding_book, face_engine)
-                    class_arr, emb_arr = self.read_embedding(args.Embedding_book)
+                    if cv2.waitKey(1) & 0xFF == ord('a'):
+                        print("Create new worker")
+                        for k in range(0, len(crop_face)):
+                            new_class_name = input('Please input name of worker:')
+                            new_save = cv2.cvtColor(crop_face[k], cv2.COLOR_BGR2RGB)
+                            cv2.imwrite('Workers/' + str(new_class_name) + '.jpg', new_save)
+                        Create_embeddings(args.Embedding_book, face_engine)
+                        class_arr, emb_arr = self.read_embedding(args.Embedding_book)
 
 
                 embs = Tpu_FaceRecognize(face_engine, crop_face)
