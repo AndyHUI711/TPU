@@ -135,7 +135,7 @@ class FaceNetRECOG:
             crop_face = self.crop_image(objs, frame, face_size)
 
             embs = Tpu_FaceRecognize(face_engine, crop_face)
-            #print(embs) #ok
+            print("embs:",embs) #ok
 
             face_num = len(objs)
             face_class = ['UNKNOWN'] * face_num
@@ -145,10 +145,8 @@ class FaceNetRECOG:
                 #print("emb_arr shape{}".format(emb_arr.shape))
                 print(i)
 
-                print("bb error")
                 #print((embs[i] - emb_arr))
                 diff_list = np.linalg.norm((embs[i] - emb_arr), axis=1)
-                print("aa error")
                 # error message 'NoneType' object is not subscriptable
                 # ValueError: operands could not be broadcast together with shapes (66,) (1,72)
                 min_index = np.argmin(diff_list)
