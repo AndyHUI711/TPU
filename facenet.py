@@ -21,6 +21,7 @@ def Tpu_FaceRecognize(engine, face_img):
       np_result.append(result[i][1])
 
     faces.append(np_result)
+
   np_face = np.array(faces)
 
   return np_face

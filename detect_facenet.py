@@ -160,7 +160,7 @@ class FaceNetRECOG:
                     class_arr, emb_arr = self.read_embedding(args.Embedding_book)
 
 
-                embs = Tpu_FaceRecognize(face_engine, crop_face)
+                embs = Tpu_FaceRecognize(face_engine, crop_face.tobytes())
                 print(embs) #ok
 
                 face_num = len(objs)

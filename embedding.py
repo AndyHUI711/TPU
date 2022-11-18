@@ -16,11 +16,11 @@ def Create_embeddings(Embedding_book_path, face_engine):
     #print(face_size) (160,160)
 
 
-    img_arr, class_arr = align_face('Workers/', face_size)
+    img_arr, class_arr = align_face('Workers/', (160,160))
 
 
 
-    embs = Tpu_FaceRecognize(face_engine, img_arr)
+    embs = Tpu_FaceRecognize(face_engine, img_arr.tobytes())
     print(embs)
 
     f = h5py.File(Embedding_book_path, 'w')
@@ -38,6 +38,7 @@ def Create_embeddings(Embedding_book_path, face_engine):
     emb_arr = f['embeddings'][:]
 
     print('read_embedding: class_arr: {};'.format(class_arr))
+    print('read_embedding: emb_arr: {};'.format(emb_arr))
 
 
 def align_face(path, face_size):
