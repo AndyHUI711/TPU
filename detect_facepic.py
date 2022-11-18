@@ -150,7 +150,7 @@ class FaceNetRECOG:
             embs = Tpu_FaceRecognize(face_engine, Images_cropped)
             print("embs:",embs) #ok
 
-            face_num = len(objs)
+            face_num = 1
             face_class = ['UNKNOWN'] * face_num
 
             for i in range(face_num):
