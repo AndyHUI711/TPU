@@ -23,6 +23,6 @@ def Tpu_FaceRecognize(engine, face_img):
     # for i in range(0, len(result)):
     #   np_result.append(result[i][1])
     faces.append(result)
-  np_face = np.array(faces)
+  np_face = np.array(faces, dtype=np.float64)
 
   return np_face
