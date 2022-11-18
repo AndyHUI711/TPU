@@ -10,7 +10,7 @@ def Tpu_FaceRecognize(engine, face_img):
   for face in face_img:
     img = np.asarray(face).flatten()
 
-    run_inference(engine, img.tobytes())
+    run_inference(engine, img)
 
     """
     @Parameters: interpreter – The tf.lite.Interpreter to query for output.
