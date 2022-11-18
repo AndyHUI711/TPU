@@ -143,7 +143,8 @@ class FaceNetRECOG:
             height, width, channels = cv2_im.shape
             scale_x, scale_y = width / inference_size[0], height / inference_size[1]
             if objs:
-                print(objs) #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
+                print(objs)
+                #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
                 # bbox = obj.bbox.scale(scale_x, scale_y)
                 # l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
                 # crop_face = frame[t:b, l:r]
@@ -182,7 +183,7 @@ class FaceNetRECOG:
                     if labels:
                         print(labels[obj.id])
                     print('Score = ', obj.score)
-                    box = obj.bounding_box.flatten().tolist()
+                    box = obj.bbox.flatten().tolist()
 
 
 
