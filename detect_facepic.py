@@ -136,6 +136,16 @@ class FaceNetRECOG:
             #crop_face = self.crop_image(objs, frame, face_size)
             crop_face = frame
 
+            img_crop = cv2.resize(crop_face, (160, 160))
+
+            # print("1",img_crop.shape)
+            img = img_crop.transpose((2, 0, 1))
+            img = (img - 127.5) / 127.5
+            # print("2",img.shape)
+            img_crop = np.expand_dims(img, 0)
+            # print("3",img_crop.shape)
+            crop_face.append(img_crop)
+
             embs = Tpu_FaceRecognize(face_engine, crop_face)
             print("embs:",embs) #ok
 
