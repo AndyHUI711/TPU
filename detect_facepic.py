@@ -56,14 +56,8 @@ class FaceNetRECOG:
             l, t, r, b = int(bbox[0]), int(bbox[1]), int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3])
             img_crop = img_crop[t:b, l:r]
 
-            #print(img_crop)
-            if img_crop == "[]":
-                return False;
-            try:
-                img_crop = cv2.resize(img_crop, (160, 160))
-            except cv2.error as e:
-                print(e)
-                return False;
+            img_crop = cv2.resize(img_crop, (160, 160))
+
             #print("1",img_crop.shape)
             img = img_crop.transpose((2, 0, 1))
             img = (img - 127.5) / 127.5
