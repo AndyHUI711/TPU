@@ -64,8 +64,7 @@ class FaceNetRECOG:
             img_crop = cv2.resize(img_crop, (160, 160))
             print("1",img_crop.shape)
 
-            img = cv2.cvtColor(img_crop, cv2.COLOR_BGR2RGB)
-            img = img.transpose((2, 0, 1))
+            img = img_crop.transpose((2, 0, 1))
             img = (img - 127.5) / 127.5
             print("2",img.shape)
             img_crop = np.expand_dims(img, 0)
