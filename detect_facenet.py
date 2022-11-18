@@ -146,7 +146,7 @@ class FaceNetRECOG:
                 print(objs)
                 #[Object(id=0, score=0.16796875, bbox=BBox(xmin=126, ymin=134, xmax=221, ymax=247))]
                 # bbox = obj.bbox.scale(scale_x, scale_y)
-                # l, t, r, b = bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]
+
                 # crop_face = frame[t:b, l:r]
                 # crop the face part of the frame
                 crop_face = self.crop_image(objs, frame, face_size)
@@ -178,6 +178,7 @@ class FaceNetRECOG:
                     if min_diff < args.threshold_face:
                         index = np.argmin(diff)
                         face_class[i] = class_arr[index]
+
                 print('Face_class:', face_class)
                 print('Classes:', class_arr)
 

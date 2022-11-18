@@ -12,7 +12,13 @@ def Tpu_FaceRecognize(engine, face_img):
 
     run_inference(engine, img.tobytes())
 
-    result = classify.get_classes(engine, top_k=200, score_threshold=- 0.5)
+    """
+    @Parameters: interpreter – The tf.lite.Interpreter to query for output.
+    @Returns: The output tensor (flattened and dequantized) as numpy.array.
+    """
+    result = classify.get_scores(engine, top_k=200, score_threshold=- 0.5)
+
+
     # result = engine.ClassifyWithInputTensor(img, top_k=3, threshold=-0.5)
     result.sort(key=takeSecond)
 
