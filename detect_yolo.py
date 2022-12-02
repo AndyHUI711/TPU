@@ -149,7 +149,7 @@ if __name__ == "__main__":
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
 
-                    //logger.info("Frame done in {}".format(tinference + tnms))
+                    #logger.info("Frame done in {}".format(tinference + tnms))
 
 
             except KeyboardInterrupt:
