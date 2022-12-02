@@ -1,1 +1,6 @@
-ppe
+0: helmet
+1: head_with_helmet
+2: person_with_helmet
+3: head
+4: person_no_helmet
+5: face
