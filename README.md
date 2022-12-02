@@ -47,3 +47,4 @@ By default, this uses the ```mobilenet_ssd_v2_face_quant_postprocess_edgetpu.tfl
 
 You can change the model and the labels file using flags ```--model``` and ```--labels```.
 
+python3 detect.py --model all_models/yolov5_ppe/best-int8.tflite --labels all_models/yolov5_ppe/ppe_labels.txt
