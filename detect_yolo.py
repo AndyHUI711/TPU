@@ -144,9 +144,12 @@ if __name__ == "__main__":
                     model.process_predictions(pred[0], full_image, pad)
 
                     tinference, tnms = model.get_last_inference_time()
+                    cv2.imshow('frame', cv2_im)
+                    if cv2.waitKey(1) & 0xFF == ord('q'):
+                        break
+
                     logger.info("Frame done in {}".format(tinference + tnms))
 
-                    cv2.imshow('frame', cv2_im)
 
             except KeyboardInterrupt:
                 break
