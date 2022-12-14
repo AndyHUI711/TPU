@@ -36,6 +36,14 @@ TPU CORAL TESTING
     pip3 install --upgrade pip
     pip3 install h5py
     ```
+ 6. Install tqdm lib:
+    ```
+    sudo pip3 install tqdm
+    ```
+ 7. Install yaml lib:
+    ```
+    sudo pip3 install pyyaml
+    ```
     
 ## Run the detection  (SSD models)
 
